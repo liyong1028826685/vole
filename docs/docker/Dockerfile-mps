@@ -1,6 +1,6 @@
 FROM java:8-jre
 
-ADD ./jar/vole-mps.jar /app/
+ADD ./vole-mps-1.0.0-SNAPSHOT.jar /app/
 
-CMD ["java", "-Xmx500m",  "-jar", "/app/vole-mps.jar"]
+CMD ["java", "-Xmx500m",  "-jar", "/app/vole-mps-1.0.0-SNAPSHOT.jar"]
 

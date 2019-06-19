@@ -41,6 +41,7 @@ public class RateLimitKeyConfig  {
             public String key(HttpServletRequest request, Route route, RateLimitProperties.Policy policy) {
                 String key = super.key(request, route, policy);
                 log.info(key + ":" + request.getMethod());
+                //对方法进行限流，可以进行动态配置来扩展
                 return key + ":" + request.getMethod();
             }
         };

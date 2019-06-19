@@ -1,8 +1,5 @@
 package com.github.vole.gateway.config;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.vole.common.bean.config.FilterIgnorePropertiesConfig;
 import com.github.vole.gateway.handler.VoleAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +16,10 @@ import org.springframework.security.config.annotation.web.configurers.Expression
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.jackson2.CoreJackson2Module;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.expression.OAuth2WebSecurityExpressionHandler;
-import org.springframework.security.web.jackson2.WebJackson2Module;
 
 import javax.annotation.Resource;
 

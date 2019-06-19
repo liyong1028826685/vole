@@ -1,6 +1,6 @@
 FROM java:8-jre
 
-ADD ./jar/vole-config.jar /app/
-CMD ["java", "-Xmx200m", "-jar", "/app/vole-config.jar"]
+ADD ./vole-config-1.0.0-SNAPSHOT.jar /app/
+CMD ["java", "-Xmx200m", "-jar", "/app/vole-config-1.0.0-SNAPSHOT.jar"]
 
 EXPOSE 4001

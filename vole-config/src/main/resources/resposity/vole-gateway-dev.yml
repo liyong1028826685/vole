@@ -5,8 +5,8 @@ spring:
   datasource:
       driver-class-name: com.mysql.jdbc.Driver
       username: root
-      password: 12345678
-      url: jdbc:mysql://127.0.0.1:3306/vole?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      password: root123
+      url: jdbc:mysql://172.26.0.4:3306/vole?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
 
 #spring:
 #  zipkin:
@@ -56,6 +56,9 @@ ignore:
     - /metrics/**
     - /loggers/**
     - /mobile/cookie
+    - /swagger-resources/**
+    - /**/v2/api-docs/**
+    - /**/swagger-ui.html
 
 
 ribbon:

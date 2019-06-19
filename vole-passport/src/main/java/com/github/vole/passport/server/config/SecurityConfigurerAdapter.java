@@ -58,6 +58,13 @@ public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
     }
 
 
+    public static void main(String[] args) {
+        DelegatingPasswordEncoder delegatingPasswordEncoder =
+                (DelegatingPasswordEncoder)  PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        String encode = delegatingPasswordEncoder.encode("123456");
+        System.out.printf(encode);
+    }
+
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<String, Object> template = new RedisTemplate<>();

@@ -90,7 +90,9 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security
                 .allowFormAuthenticationForClients()
+                // 开启/oauth/check_token验证端口认证权限访问
                 .tokenKeyAccess("isAuthenticated()")
+                // 开启/oauth/token_key验证端口无权限访问
                 .checkTokenAccess("permitAll()");
     }
 

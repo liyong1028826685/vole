@@ -1,5 +1,5 @@
 FROM java:8-jre
 
-ADD ./jar/vole-portal-data.jar /app/
+ADD ./vole-portal-data-1.0.0-SNAPSHOT.jar /app/
 
-CMD ["java", "-Xmx500m", "-jar", "/app/vole-portal-data.jar"]
+CMD ["java", "-Xmx500m", "-jar", "/app/vole-portal-data-1.0.0-SNAPSHOT.jar"]
