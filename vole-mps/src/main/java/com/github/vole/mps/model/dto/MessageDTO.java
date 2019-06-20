@@ -1,7 +1,9 @@
 package com.github.vole.mps.model.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * MQ消息
@@ -9,9 +11,10 @@ import lombok.Data;
  * @Author liyong
  * @Date 2019-06-20 09:55
  */
-@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
-public abstract class MessageDTO {
+public class MessageDTO {
     /**
      * 消息id
      */
@@ -25,5 +28,7 @@ public abstract class MessageDTO {
      * mq类型
      * @return
      */
-    abstract String getMqType();
+    String getMqType(){
+        return "Redis";
+    }
 }

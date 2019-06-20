@@ -1,5 +1,6 @@
 package com.github.vole.mps.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.vole.mps.model.dto.MessageDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,7 @@ public class PublisherService {
      */
     public boolean sendMessage(String channel, MessageDTO message) {
         try {
-            redisTemplate.convertAndSend(channel, message);
+            redisTemplate.convertAndSend(channel, JSONObject.toJSONString(message));
             return true;
         } catch (Exception e) {
             logger.info("消息发送失败！异常信息:", e);

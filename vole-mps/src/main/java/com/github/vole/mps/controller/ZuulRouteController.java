@@ -39,16 +39,20 @@ public class ZuulRouteController extends AbstractController<SysZuulRouteService,
     }
 
     @Override
-    public String add(Model model) {
-        String result = super.add(model);
-        sysZuulRouteService.applyZuulRoute();
+    public R<Boolean> doAdd(SysZuulRoute entity) {
+        R<Boolean> result = super.doAdd(entity);
+        if(result.getData()){
+            sysZuulRouteService.applyZuulRoute();
+        }
         return result;
     }
 
     @Override
-    public String edit(String id, Model model) {
-        String result = super.edit(id, model);
-        sysZuulRouteService.applyZuulRoute();
+    public R<Boolean> doEdit(SysZuulRoute entity, Model model) {
+        R<Boolean> result = super.doEdit(entity, model);
+        if(result.getData()){
+            sysZuulRouteService.applyZuulRoute();
+        }
         return result;
     }
 
@@ -58,6 +62,7 @@ public class ZuulRouteController extends AbstractController<SysZuulRouteService,
         sysZuulRouteService.applyZuulRoute();
         return result;
     }
+
 
     @Override
     public R<Boolean> deleteBatch(List<String> ids) {

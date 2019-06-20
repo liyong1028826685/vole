@@ -1,16 +1,14 @@
 package com.github.vole.mps.model.dto;
 
+import lombok.Builder;
+
 /**
  * @Author liyong
  * @Date 2019-06-20 09:57
  */
-public class RedisMessageDTO extends MessageDTO{
-
-    RedisMessageDTO(String id, String message) {
+public class RedisMessageDTO extends MessageDTO {
+    @Builder
+    public RedisMessageDTO(String id, String message) {
         super(id, message);
-    }
-    @Override
-    String getMqType() {
-        return "Redis";
     }
 }

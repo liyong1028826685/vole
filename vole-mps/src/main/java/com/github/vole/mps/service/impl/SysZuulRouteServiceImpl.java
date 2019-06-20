@@ -3,6 +3,8 @@ package com.github.vole.mps.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.vole.common.constants.CommonConstant;
+import com.github.vole.common.utils.CollectionUtil;
+import com.github.vole.common.vo.SysZuulRouteVO;
 import com.github.vole.mps.constants.MessageTopicConstant;
 import com.github.vole.mps.mapper.SysZuulRouteMapper;
 import com.github.vole.mps.model.dto.MessageDTO;
@@ -12,13 +14,16 @@ import com.github.vole.mps.service.PublisherService;
 import com.github.vole.mps.service.SysZuulRouteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author liyong
@@ -44,13 +49,18 @@ public class SysZuulRouteServiceImpl extends ServiceImpl<SysZuulRouteMapper, Sys
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.eq(CommonConstant.DEL_FLAG, CommonConstant.STATUS_NORMAL);
         List<SysZuulRoute> routeList = this.list(wrapper);
+        if (routeList != null) {
+            List<SysZuulRouteVO> collect = routeList.stream().filter(r->"1".equals(r.getEnabled())).map(r -> {
+                SysZuulRouteVO vo = new SysZuulRouteVO();
+                BeanUtils.copyProperties(r, vo);
+                return vo;
+            }).collect(Collectors.toList());
+            redisTemplate.opsForValue().set(CommonConstant.ROUTE_KEY, collect);
 
-        redisTemplate.opsForValue().set(CommonConstant.ROUTE_KEY, routeList);
-
-        MessageDTO messageDTO = RedisMessageDTO.builder().id(UUID.randomUUID().toString()).message("动态路由发生变更").build();
-        publisherService.sendMessage(MessageTopicConstant.ROUTE_CHANGE_MESSAGE, messageDTO);
-
-        logger.info("推送MQ消息:{}", messageDTO);
+            MessageDTO messageDTO = RedisMessageDTO.builder().id(UUID.randomUUID().toString()).message("动态路由发生变更").build();
+            publisherService.sendMessage(MessageTopicConstant.ROUTE_CHANGE_MESSAGE, messageDTO);
+            logger.info("推送MQ消息:{}", messageDTO);
+        }
         return Boolean.TRUE;
     }
 }
