@@ -1,7 +1,5 @@
 package com.github.vole.gateway.listener;
 
-import com.github.vole.gateway.config.RedisReivceConfig;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

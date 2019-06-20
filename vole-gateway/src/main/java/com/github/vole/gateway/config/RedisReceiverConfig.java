@@ -16,9 +16,9 @@ import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
  * @Date 2019-06-20 09:42
  */
 @Configuration
-public class RedisReivceConfig {
+public class RedisReceiverConfig {
 
-    private static Logger logger = LoggerFactory.getLogger(RedisReivceConfig.class);
+    private static Logger logger = LoggerFactory.getLogger(RedisReceiverConfig.class);
 
     /**
      * redis消息监听器容器
