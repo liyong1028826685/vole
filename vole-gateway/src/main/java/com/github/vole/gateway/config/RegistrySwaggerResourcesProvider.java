@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 访问http://localhost:9999/swagger-resources获取需要集成在线文档api业务模块的swagger地址
+ * 例如:[/demo/v2/api-docs,/mps/v2/api-docs]
+ *      集成地址:http://localhost:9999/demo/v2/api-docs
+ * 集成easymock 聚合在线文档
  * routeLocator 聚合swagger
  */
 @Component

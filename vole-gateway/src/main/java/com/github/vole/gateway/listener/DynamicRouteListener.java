@@ -1,5 +1,6 @@
 package com.github.vole.gateway.listener;
 
+import com.github.vole.gateway.config.DynamicRouteLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,11 @@ public class DynamicRouteListener {
 
     private static Logger logger = LoggerFactory.getLogger(DynamicRouteListener.class);
 
-    @Autowired
-    ApplicationEventPublisher publisher;
+//    @Autowired
+//    ApplicationEventPublisher publisher;
 
     @Autowired
-    RouteLocator routeLocator;
+    private DynamicRouteLocator dynamicRouteLocator;
 
     /**
      * 消息处理
@@ -44,7 +45,8 @@ public class DynamicRouteListener {
      * 刷新路由规则到zuul
      */
     public void refreshRoute() {
-        RoutesRefreshedEvent routesRefreshedEvent = new RoutesRefreshedEvent(routeLocator);
-        publisher.publishEvent(routesRefreshedEvent);
+//        RoutesRefreshedEvent routesRefreshedEvent = new RoutesRefreshedEvent(routeLocator);
+//        publisher.publishEvent(routesRefreshedEvent);
+        dynamicRouteLocator.refresh();
     }
 }

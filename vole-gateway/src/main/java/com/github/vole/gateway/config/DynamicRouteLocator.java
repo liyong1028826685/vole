@@ -7,6 +7,8 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.netflix.zuul.filters.RefreshableRouteLocator;
+import org.springframework.cloud.netflix.zuul.filters.SimpleRouteLocator;
 import org.springframework.cloud.netflix.zuul.filters.ZuulProperties;
 import org.springframework.cloud.netflix.zuul.filters.discovery.DiscoveryClientRouteLocator;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -17,13 +19,13 @@ import java.util.*;
  * 动态路由实现
  */
 @Slf4j
-public class DynamicRouteLocator extends DiscoveryClientRouteLocator {
+public class DynamicRouteLocator extends SimpleRouteLocator {
     private ZuulProperties properties;
     private RedisTemplate redisTemplate;
 
     public DynamicRouteLocator(String servletPath, DiscoveryClient discovery, ZuulProperties properties,
                                ServiceInstance localServiceInstance, RedisTemplate redisTemplate) {
-        super(servletPath, discovery, properties, localServiceInstance);
+        super(servletPath, properties);
         this.properties = properties;
         this.redisTemplate = redisTemplate;
     }
@@ -104,5 +106,9 @@ public class DynamicRouteLocator extends DiscoveryClientRouteLocator {
             routes.put(zuulRoute.getPath(), zuulRoute);
         }
         return routes;
+    }
+
+    public void refresh() {
+        doRefresh();
     }
 }
